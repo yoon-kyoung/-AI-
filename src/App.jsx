@@ -152,9 +152,9 @@ function Tag({ label, color = C.primary }) {
   );
 }
 
-function Card({ children, style = {} }) {
+function Card({ children, style = {}, className = "" }) {
   return (
-    <div style={{
+    <div className={className} style={{
       background: C.card, border: `1px solid ${C.border}`,
       borderRadius: 16, padding: "20px", ...style,
     }}>
@@ -250,6 +250,8 @@ function HomePage({ setPage, bp }) {
     { value: "4.6★", label: "추천 만족도" },
   ];
 
+  const d = (ms) => ({ animationDelay: `${ms}ms` });
+
   if (!bp.isMobile) {
     return (
       <div>
@@ -264,23 +266,23 @@ function HomePage({ setPage, bp }) {
         }}>
           {/* 왼쪽: 텍스트 + CTA */}
           <div>
-            <h1 style={{
+            <h1 className="anim-up" style={{
               fontSize: bp.isDesktop ? 48 : 34,
               fontWeight: 900, lineHeight: 1.2, color: C.text,
-              margin: "0 0 20px",
+              margin: "0 0 20px", ...d(0),
             }}>
               나의 AI 리터러시,<br />
               <span style={{ color: C.primary }}>지금 바로 진단</span>해요
             </h1>
-            <p style={{
+            <p className="anim-up" style={{
               fontSize: bp.isDesktop ? 17 : 15,
-              color: C.subtext, lineHeight: 1.8, margin: "0 0 36px",
+              color: C.subtext, lineHeight: 1.8, margin: "0 0 36px", ...d(120),
             }}>
               간단한 7문항으로 AI 활용 수준을 측정하고<br />
               수준·직무·관심사에 맞는 학습 콘텐츠와<br />
               정부 정책 사업을 자동으로 추천해드려요.
             </p>
-            <div style={{ display: "flex", gap: 14, alignItems: "center", marginBottom: 48, flexWrap: "wrap" }}>
+            <div className="anim-up" style={{ display: "flex", gap: 14, alignItems: "center", marginBottom: 48, flexWrap: "wrap", ...d(220) }}>
               <button onClick={() => setPage("quiz")} style={{
                 background: C.primary, color: "#fff", border: "none",
                 borderRadius: 14, padding: "16px 48px",
@@ -294,7 +296,7 @@ function HomePage({ setPage, bp }) {
                 color: C.subtext, cursor: "pointer",
               }}>통계 보기</button>
             </div>
-            <div style={{ display: "flex", gap: bp.isDesktop ? 40 : 28 }}>
+            <div className="anim-fade" style={{ display: "flex", gap: bp.isDesktop ? 40 : 28, ...d(340) }}>
               {stats.map((s, i) => (
                 <div key={i}>
                   <div style={{ fontSize: bp.isDesktop ? 24 : 20, fontWeight: 900, color: C.primary }}>{s.value}</div>
@@ -307,11 +309,12 @@ function HomePage({ setPage, bp }) {
           {/* 오른쪽: 레벨 카드 */}
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {levels.map((lv, i) => (
-              <div key={i} style={{
+              <div key={i} className="anim-right" style={{
                 background: C.card, border: `1px solid ${C.border}`,
                 borderLeft: `4px solid ${lv.color}`,
                 borderRadius: 14, padding: "14px 20px",
                 display: "flex", alignItems: "center", gap: 16,
+                ...d(100 + i * 100),
               }}>
                 <div style={{
                   width: 40, height: 40, borderRadius: 10,
@@ -329,8 +332,11 @@ function HomePage({ setPage, bp }) {
 
         {/* 특징 3개 */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: bp.isDesktop ? 24 : 16 }}>
-          {features.map((f) => (
-            <Card key={f.title} style={{ textAlign: "center", padding: bp.isDesktop ? "32px 24px" : "24px 16px" }}>
+          {features.map((f, i) => (
+            <Card key={f.title} className="anim-up" style={{
+              textAlign: "center", padding: bp.isDesktop ? "32px 24px" : "24px 16px",
+              ...d(400 + i * 100),
+            }}>
               <div style={{ fontSize: bp.isDesktop ? 40 : 32, marginBottom: 14 }}>{f.icon}</div>
               <div style={{ fontWeight: 700, fontSize: bp.isDesktop ? 17 : 14, color: C.text, marginBottom: 8 }}>{f.title}</div>
               <div style={{ fontSize: bp.isDesktop ? 14 : 12, color: C.muted, lineHeight: 1.6 }}>{f.desc}</div>
@@ -345,25 +351,25 @@ function HomePage({ setPage, bp }) {
   return (
     <div>
       <div style={{ textAlign: "center", marginBottom: 40 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, lineHeight: 1.3, color: C.text, margin: "0 0 14px" }}>
+        <h1 className="anim-up" style={{ fontSize: 28, fontWeight: 800, lineHeight: 1.3, color: C.text, margin: "0 0 14px", ...d(0) }}>
           나의 AI 리터러시,<br />
           <span style={{ color: C.primary }}>지금 바로 진단</span>해요
         </h1>
-        <p style={{ fontSize: 15, color: C.subtext, lineHeight: 1.7, margin: "0 0 32px" }}>
+        <p className="anim-up" style={{ fontSize: 15, color: C.subtext, lineHeight: 1.7, margin: "0 0 32px", ...d(120) }}>
           간단한 7문항으로 AI 활용 수준을 측정하고<br />
           수준·직무·관심사에 맞는 학습 콘텐츠와<br />
           정부 정책 사업을 자동으로 추천해드려요.
         </p>
-        <button onClick={() => setPage("quiz")} style={{
+        <button className="anim-up" onClick={() => setPage("quiz")} style={{
           background: C.primary, color: "#fff", border: "none",
           borderRadius: 14, padding: "16px 48px", fontSize: 16, fontWeight: 700,
-          cursor: "pointer", boxShadow: `0 4px 20px ${C.primary}44`,
+          cursor: "pointer", boxShadow: `0 4px 20px ${C.primary}44`, ...d(220),
         }}>진단 시작하기 →</button>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 32 }}>
-        {features.map((f) => (
-          <Card key={f.title} style={{ textAlign: "center", padding: "16px 12px" }}>
+        {features.map((f, i) => (
+          <Card key={f.title} className="anim-up" style={{ textAlign: "center", padding: "16px 12px", ...d(320 + i * 80) }}>
             <div style={{ fontSize: 26, marginBottom: 8 }}>{f.icon}</div>
             <div style={{ fontWeight: 700, fontSize: 13, color: C.text, marginBottom: 4 }}>{f.title}</div>
             <div style={{ fontSize: 11, color: C.muted, lineHeight: 1.5 }}>{f.desc}</div>
@@ -371,7 +377,7 @@ function HomePage({ setPage, bp }) {
         ))}
       </div>
 
-      <Card style={{ marginBottom: 20 }}>
+      <Card className="anim-up" style={{ marginBottom: 20, ...d(560) }}>
         <div style={{ fontWeight: 700, fontSize: 14, color: C.text, marginBottom: 12 }}>AI 리터러시 4단계</div>
         {levels.map((lv, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
@@ -389,11 +395,11 @@ function HomePage({ setPage, bp }) {
         ))}
       </Card>
 
-      <div style={{
+      <div className="anim-fade" style={{
         padding: "16px 20px",
         background: `linear-gradient(135deg, ${C.primary}0D, ${C.accent}0D)`,
         border: `1px solid ${C.primary}22`, borderRadius: 16,
-        display: "flex", justifyContent: "space-around",
+        display: "flex", justifyContent: "space-around", ...d(680),
       }}>
         {stats.map((s, i) => (
           <div key={i} style={{ textAlign: "center" }}>

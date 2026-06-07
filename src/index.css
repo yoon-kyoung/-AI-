@@ -44,3 +44,23 @@ button {
   opacity: 0;
   animation: fadeIn 0.5s ease forwards;
 }
+
+@keyframes cta-shake {
+  0%, 78%, 100% { transform: translateX(0) rotate(0deg); }
+  80%  { transform: translateX(-5px) rotate(-1deg); }
+  82%  { transform: translateX(5px)  rotate(1deg); }
+  84%  { transform: translateX(-4px) rotate(-0.8deg); }
+  86%  { transform: translateX(4px)  rotate(0.8deg); }
+  88%  { transform: translateX(-2px) rotate(-0.3deg); }
+  90%  { transform: translateX(2px)  rotate(0.3deg); }
+  92%  { transform: translateX(0)    rotate(0deg); }
+}
+
+.btn-cta {
+  transition: background-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.btn-cta:hover {
+  background-color: #7C74EE !important;
+  box-shadow: rgba(79, 70, 229, 0.15) 0px 4px 24px !important;
+}

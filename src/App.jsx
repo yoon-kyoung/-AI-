@@ -283,11 +283,12 @@ function HomePage({ setPage, bp }) {
               정부 정책 사업을 자동으로 추천해드려요.
             </p>
             <div className="anim-up" style={{ display: "flex", gap: 14, alignItems: "center", marginBottom: 48, flexWrap: "wrap", ...d(220) }}>
-              <button onClick={() => setPage("quiz")} style={{
+              <button className="btn-cta" onClick={() => setPage("quiz")} style={{
                 background: C.primary, color: "#fff", border: "none",
                 borderRadius: 14, padding: "16px 48px",
                 fontSize: bp.isDesktop ? 17 : 15, fontWeight: 700,
                 cursor: "pointer", boxShadow: `0 4px 20px ${C.primary}44`,
+                animation: "cta-shake 3s ease-in-out 1s infinite",
               }}>진단 시작하기 →</button>
               <button onClick={() => setPage("dashboard")} style={{
                 background: "none", border: `1.5px solid ${C.border}`,
@@ -360,10 +361,12 @@ function HomePage({ setPage, bp }) {
           수준·직무·관심사에 맞는 학습 콘텐츠와<br />
           정부 정책 사업을 자동으로 추천해드려요.
         </p>
-        <button className="anim-up" onClick={() => setPage("quiz")} style={{
+        <button className="btn-cta" onClick={() => setPage("quiz")} style={{
           background: C.primary, color: "#fff", border: "none",
           borderRadius: 14, padding: "16px 48px", fontSize: 16, fontWeight: 700,
-          cursor: "pointer", boxShadow: `0 4px 20px ${C.primary}44`, ...d(220),
+          cursor: "pointer", boxShadow: `0 4px 20px ${C.primary}44`,
+          opacity: 0,
+          animation: `fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 220ms forwards, cta-shake 3s ease-in-out 1.5s infinite`,
         }}>진단 시작하기 →</button>
       </div>
 
